@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<form th:action="@{/add}", method="POST" th:object="${ctmh}">
+    Mã SV: <input type="text" th:field="*{masv}"><br/>
+    Quiz 1: <input type="text" th:field="*{quiz1}"><br/>
+    Quiz 2: <input type="text" th:field="*{quiz2}"><br/>
+    Quiz 3: <input type="text" th:field="*{quiz3}"><br/>
+    <button>Xác nhận</button>
+</form>
+<br/>
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Mã môn</th>
+        <th>Mã SV</th>
+        <th>Quiz 1</th>
+        <th>Quiz 2</th>
+        <th>Quiz 3</th>
+    </tr>
+    <tr th:each="mh, state : ${ctmhList}">
+        <td th:text="${state.count}"></td>
+        <td th:text="${mh.mamon}"></td>
+        <td th:text="${mh.masv}"></td>
+        <td th:text="${mh.quiz1}"></td>
+        <td th:text="${mh.quiz2}"></td>
+        <td th:text="${mh.quiz3}"></td>
+    </tr>
+</table>
+</body>
+</html>
