@@ -5,14 +5,22 @@
     <title>Index</title>
 </head>
 <body>
-<form th:action="@{/add}", method="POST" th:object="${ctmh}">
+<h2>Thêm sinh viên</h2>
+<form th:action="@{/add}" , method="POST" th:object="${ctmh}">
     Mã SV: <input type="text" th:field="*{masv}"><br/>
     Quiz 1: <input type="text" th:field="*{quiz1}"><br/>
     Quiz 2: <input type="text" th:field="*{quiz2}"><br/>
     Quiz 3: <input type="text" th:field="*{quiz3}"><br/>
     <button>Xác nhận</button>
 </form>
-<br/>
+<hr/>
+<h1 th:text="'Sinh viên có điểm TB cao nhất là '+${svDiemCaoNhat.masv} "></h1>
+<p th:text="'Quiz 1: '+${svDiemCaoNhat.quiz1}"></p>
+<p th:text="'Quiz 2: '+${svDiemCaoNhat.quiz2}"></p>
+<p th:text="'Quiz 3: '+${svDiemCaoNhat.quiz3}"></p>
+<p th:text="'Điểm TB: '+(${svDiemCaoNhat.quiz1}+${svDiemCaoNhat.quiz2}+${svDiemCaoNhat.quiz3})/3"></p>
+<hr/>
+<h2>Danh sách điểm sinh viên</h2>
 <table border="1">
     <tr>
         <th>#</th>
@@ -21,6 +29,7 @@
         <th>Quiz 1</th>
         <th>Quiz 2</th>
         <th>Quiz 3</th>
+        <th>Điểm trung bình</th>
     </tr>
     <tr th:each="mh, state : ${ctmhList}">
         <td th:text="${state.count}"></td>
@@ -29,6 +38,29 @@
         <td th:text="${mh.quiz1}"></td>
         <td th:text="${mh.quiz2}"></td>
         <td th:text="${mh.quiz3}"></td>
+        <td th:text="(${mh.quiz3}+${mh.quiz2}+${mh.quiz1})/3"></td>
+    </tr>
+</table>
+<hr/>
+<h2>Sinh viên có điểm trung bình trên 5</h2>
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Mã môn</th>
+        <th>Mã SV</th>
+        <th>Quiz 1</th>
+        <th>Quiz 2</th>
+        <th>Quiz 3</th>
+        <th>Điểm trung bình</th>
+    </tr>
+    <tr th:each="mh, state : ${ctmhListTren5}">
+        <td th:text="${state.count}"></td>
+        <td th:text="${mh.mamon}"></td>
+        <td th:text="${mh.masv}"></td>
+        <td th:text="${mh.quiz1}"></td>
+        <td th:text="${mh.quiz2}"></td>
+        <td th:text="${mh.quiz3}"></td>
+        <td th:text="(${mh.quiz3}+${mh.quiz2}+${mh.quiz1})/3"></td>
     </tr>
 </table>
 </body>
